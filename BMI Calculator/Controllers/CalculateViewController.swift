@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculateViewController: UIViewController {
 
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
@@ -32,13 +32,17 @@ class ViewController: UIViewController {
         let height = heightSlider.value
         let weight = weightSlider.value
         
-        let BMI = (weight / pow(height, 2))
+        let bmi = (weight / pow(height, 2))
+        
+        self.performSegue(withIdentifier: "goToResults", sender: self)
         
         
-        let secondVC = SecondViewController()
-        secondVC.bmiValue = String(format: "%.1f", BMI)
-        
-        self.present(secondVC, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        if segue.identifier == "goToResults" {
+            let destinationVC = segue.destination
+        }
     }
 }
 
